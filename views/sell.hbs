@@ -1,0 +1,71 @@
+<div class="ps-5 bg-gray-200 flex" x-data="{food: 'false'}">
+    <div class="flex-1">   
+        <nav class="flex justify-between items-center h-[10dvh] mr-5">
+            <div>
+                <h1 class="font-bold">Kala's Kitchen</h1>
+                <small class="font-extralight">Choose Menu</small>
+            </div>
+            <div class="w-1/6">
+                <input type="text" class="bg-white w-full">
+            </div>
+        </nav>
+        <section class="flex h-[90dvh]">
+            <aside class="w-1/6 h-full py-3 flex flex-col gap-3">
+                <div class="box">
+                    <h1>All Menu</h1>
+                    <small>{{ total_food }} items</small>
+                </div>
+                {{#each aside }}
+                    <div class="box" @click="food = '{{this.[0]}}'" :class="food === '{{this.[0]}}' ? 'highlight' : ''">
+                        <h1>{{this.food_name}}</h1>
+                        <p>{{this.id }} items</p>
+                    </div>
+                {{/each }}
+            </aside>
+            <main class="mx-5 flex flex-wrap gap-4">
+                {{#each cards }}
+                    <div class="bigger_box max-w-50 max-h-3/4">
+                        <img src="/assets/a.png" alt="" height="100px" class="rounded-2xl"><br>
+                        <div class="mb-3">
+                            <h3 class="font-semibold">{{ this.food_name }}</h3>
+                            <small class="font-xs leading-0.5">{{ this.description }}</small>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-green-900 font-bold">${{ this.price }}</p>
+                            <div class="flex gap-3 items-center">
+                                <p class="foot bg-grey-200">-</p>
+                                <p class="font-bold">1</p>
+                                <p class="foot bg-green-900 text-white">+</p>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                <div id="data1"></div>
+            </main>
+        </section> 
+    </div>
+    <section class="min-w-1/4 bg-white p-4 ">
+        <div class="mb-2">
+            <div class="flex justify-between">
+                <div>
+                    <h2 class="font-bold">Alimat Ariel</h2>
+                    <small>order #925 / Dine in</small>
+                </div>
+                <h2 class="cursor-pointer bg-green-700 text-white p-2 h-fit rounded">A5</h2>
+            </div>
+            <small>25/04/2026 . {{ title.time }}pm</small>
+        </div><hr>
+        <h2 class="font-bold mb-2">Order Detail</h2>
+        <div class="border-b border-b-gray-400 pb-2">
+            <div class="flex justify-between font-semibold text-sm">
+                <p>Scrambled Egg with toast</p>
+                <p>X1</p>
+            </div>
+            <div class="flex justify-between mt-2">
+                <small class="text-red-500">Delete X</small>
+                <small class="font-bold">$16.00</small>
+            </div>
+        </div>
+        <button class="bg-yellow-300 w-full p-1.5 mt-3 shadow-black cursor-pointer hover:bg-green-500 hover:text-white">Proceed order</button>
+    </section>
+</div>

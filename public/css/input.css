@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+.box{
+    @apply bg-white rounded h-1/4 p-2.5 flex flex-col justify-between cursor-pointer;
+}
+.box:not(:first-child), .highlight{
+    @apply hover:bg-gray-500 hover:text-white;
+}
+.highlight{
+    @apply bg-amber-300;
+}
+.box h1{
+    @apply font-bold;
+}
+.box small{
+    @apply mt-1;
+}
+.bigger_box{
+    @apply bg-white p-4 w-2/4 rounded-2xl;
+}
+.foot{
+    @apply font-extrabold text-lg rounded-full cursor-pointer h-7 w-7 flex justify-center items-center;
+}
+.imput{
+    @apply w-full mb-3 p-3;
+}
+.imput .s{
+    @apply my-2;
+}
+.imput button{
+    @apply bg-green-900 text-white w-32 text-sm rounded-3xl p-1 cursor-pointer hover:bg-green-600;
+}
+.imput input, .imput select{
+    @apply bg-white shadow-black px-2 rounded h-10 ; 
+}

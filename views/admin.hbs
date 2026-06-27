@@ -1,0 +1,65 @@
+<div class="flex p-4" x-data="{form_type: 'food'}">
+    <aside class="p-4 bg-green-100 rounded-l-2xl">
+        <h1 class="my-2">Food manager</h1>
+        <ul class="flex flex-col pt-20 gap-14" >
+            <li @click="form_type = 'food'">
+                Food category
+            </li>
+            <li>Change user password</li>
+            <li>Update Sub food</li>
+        </ul>
+    </aside>
+    <div class="flex-1 bg-gray-50 p-3 overflow-scroll">
+        <form class="imput" action="/insert_food" method="post" x-show="form_type === 'food'">
+            <div class="s flex flex-col" x-data="{inputs: []}">
+                <div class="flex justify-between">
+                    <label for="">Food Category</label>
+                    <div class="flex gap-4" title="click to add / remove items. ">
+                        <h1 class="text-red-700 font-extrabold cursor-pointer text-2xl" @click="inputs.pop('')">-</h1>
+                        <h1 class="text-green-700 font-extrabold cursor-pointer text-2xl" @click="inputs.push('')">+</h1>
+                    </div>
+                </div>
+                <div>
+                    <input class="w-full my-2" type="text" placeholder="e.g soup" name="food[]">
+                    <template x-for="(a, b) in inputs" :key="index">
+                        <input name="food[]" class="w-full my-2" type="text" placeholder="e.g soup" x-model="inputs[b]">
+                    </template>
+                </div>
+            </div>
+            <button>Add Category</button>
+        </form>
+
+        <form class="imput" action="/insert_subfood" method="post" x-show="form_type === 'food'" enctype="multipart/form-data">
+            <div class="s flex flex-col">
+                <label for="" class="font-bold text-green-950 mb-5">Food Group</label>
+                <select name="group" id="" class="border rounded">
+                    {{#each group }}
+                        <option value={{ this.food_name }} name="foodname[]">{{this.food_name }}</option>
+                    {{/each }}
+                </select>
+            </div>
+            <div class="s flex flex-col">
+                <label for="">Food Title</label>
+                <input type="text" name="foodtitle" placeholder="e.g Afang soup with perewinkles">
+            </div>
+            <div class="s flex flex-col">
+                <label for="">Food Description</label>
+                <input type="text" name="fooddescription" placeholder="e.g Afang soup with perewinkles">
+            </div>
+            <div class="s flex flex-col">
+                <label for="">Price</label>
+                <input type="text" name="price" placeholder="e.g 2000">
+            </div>
+            <div class="s flex flex-col">
+                <label for="">Image</label>
+                <input type="file" name="photo">
+            </div>
+            <button>Send to server</button>
+        </form>
+        <form class="imput" action="" method="post" x-show="form_type === 'food'">
+            Name:
+            <input type="text" placeholder="Enter name">
+            <button>Send to server</button>
+        </form>
+    </div>
+</div>
