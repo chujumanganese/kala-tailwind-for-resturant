@@ -7,6 +7,7 @@ const db = knex({ client: "sqlite3",
 });
 
 async function create_food(name){
+    if (name.trim() === "")  return "Failed";
     await db("food").insert({food_name: name});
     return "success";
 }
@@ -28,6 +29,7 @@ async function delete_food(food){
 
 // subfood
 async function create_subfood(group, name, desc, img, p){
+    if (name.trim() === "" || desc.trim() === "" || group.trim() === "")  return "Failed";
     await db("subfood").insert({ id: group, food_name: name, description: desc, image: img, price: p});
     return "success";
 }

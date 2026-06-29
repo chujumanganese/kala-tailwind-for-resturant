@@ -1,33 +1,69 @@
-<div class="flex p-4" x-data="{form_type: 'food'}">
-    <aside class="p-4 bg-green-100 rounded-l-2xl">
+<div class="flex h-screen" x-data="{form_type: 'cat'}">
+    <aside class="admina p-4 bg-amber-100 rounded-l-2xl">
         <h1 class="my-2">Food manager</h1>
         <ul class="flex flex-col pt-20 gap-14" >
-            <li @click="form_type = 'food'">
-                Food category
+            <li class="flex gap-3" @click="form_type = 'cat'">
+                <i data-lucide="hamburger"></i>
+                <p>Food category</p>
             </li>
-            <li>Change user password</li>
-            <li>Update Sub food</li>
+            <li class="flex gap-3" @click="form_type = 'psswd'">
+                <i data-lucide="users"></i>
+                <p>Change user password</p>
+            </li>
+            <li class="flex gap-3" @click="form_type = 'food'">
+                <i data-lucide="cooking-pot"></i>
+                <p>Update Sub food</p>
+            </li>
         </ul>
     </aside>
     <div class="flex-1 bg-gray-50 p-3 overflow-scroll">
-        <form class="imput" action="/insert_food" method="post" x-show="form_type === 'food'">
-            <div class="s flex flex-col" x-data="{inputs: []}">
-                <div class="flex justify-between">
-                    <label for="">Food Category</label>
-                    <div class="flex gap-4" title="click to add / remove items. ">
-                        <h1 class="text-red-700 font-extrabold cursor-pointer text-2xl" @click="inputs.pop('')">-</h1>
+        <div x-show="form_type === 'cat'" x-data="{remove: ''}">
+            <h1 class="font-bold text-green-900 pl-2">Food Categories</h1>
+            <ul class="box_cat flex gap-3 flex-wrap mt-4">
+                {{#each group }}
+                    <li @click="remove = $event.target.innerHTML">{{ this.food_name }}</li>
+                {{/each }}
+            </ul>
+            <form action="/insert_food" method="post">
+                <fieldset  class="border p-3" x-data="{inputs: []}">
+                    <legend>Food Category</legend>
+                    <div class="flex gap-4 w-fit ml-auto" title="click to add / remove items. ">
+                        <h1 class="text-red-700 font-extrabold bg-gray-200 px-2 cursor-pointer text-2xl" @click="inputs.pop('')">-</h1>
                         <h1 class="text-green-700 font-extrabold cursor-pointer text-2xl" @click="inputs.push('')">+</h1>
                     </div>
-                </div>
-                <div>
-                    <input class="w-full my-2" type="text" placeholder="e.g soup" name="food[]">
-                    <template x-for="(a, b) in inputs" :key="index">
-                        <input name="food[]" class="w-full my-2" type="text" placeholder="e.g soup" x-model="inputs[b]">
-                    </template>
-                </div>
-            </div>
-            <button>Add Category</button>
-        </form>
+                    <div>
+                        <input class="w-full my-2" type="text" placeholder="e.g soup" name="food[]">
+                        <template x-for="(a, b) in inputs" :key="index">
+                            <input name="food[]" class="w-full my-2" type="text" placeholder="e.g soup" x-model="inputs[b]">
+                        </template>
+                    </div>
+                    <button class="mt-2">Add Category</button>
+                </fieldset>
+            </form>
+            <form action="" class="mt-6">
+                <fieldset class="border p-3">
+                    <legend>Remove food category</legend>
+                    <div>
+                        <input class="w-1/3" type="text" placeholder="Enter category" x-model="remove">
+                        <button class="exclude bg-gray-300 p-2 rounded cursor-pointer">
+                            <i data-lucide="trash"></i>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+            <form action="" class="mt-6">
+                <fieldset class="border p-3">
+                    <legend>Update food category</legend>
+                    <div class="grid gap-3">
+                        <input class="w-1/3" type="text" placeholder="Previous category">
+                        <input class="w-1/3" type="text" placeholder="Enter new category">
+                        <button class="exclude">
+                            <span>Update Category</span>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
 
         <form class="imput" action="/insert_subfood" method="post" x-show="form_type === 'food'" enctype="multipart/form-data">
             <div class="s flex flex-col">
@@ -56,7 +92,7 @@
             </div>
             <button>Send to server</button>
         </form>
-        <form class="imput" action="" method="post" x-show="form_type === 'food'">
+        <form class="imput" action="" method="post" x-show="form_type === 'psswd'">
             Name:
             <input type="text" placeholder="Enter name">
             <button>Send to server</button>
