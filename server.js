@@ -24,16 +24,9 @@ var titles = {
     "price": '16.00'
 };
 
-app.get("/processing", async (req, res)=>{
-    let food = await read_food();
-    let subfood = await read_subfood();
-
-    console.log(subfood);
-    // var total = Object.values(food);
-    var total = 0;
-    // total = total.reduce((sum, num)=> sum + num, 0);
-
-    res.render("sell", {aside: food, cards: subfood, total_food: total, title:titles});
+app.get("/", async (req, res)=>{
+    let {food, subfood} = await read_food();
+    res.render("payment", {aside: food, cards: subfood, total_food: 0, title:titles});
 })
 
 app.get("/admin", async (req, res)=>{

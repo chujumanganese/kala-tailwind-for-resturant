@@ -13,8 +13,12 @@ async function create_food(name){
 }
 
 async function read_food(){
-    let food = await db("food");
-    return food;
+    const [food, subfood] = await Promise.all([
+        db("food").select("*"),
+        db("subfood").select("*")
+    ]);
+
+    return { food, subfood };
 }
 
 async function update_food(old, new_food){

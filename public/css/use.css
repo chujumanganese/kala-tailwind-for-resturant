@@ -25,7 +25,6 @@
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
-    --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -210,6 +209,12 @@
   .my-2 {
     margin-block: calc(var(--spacing) * 2);
   }
+  .ms-3 {
+    margin-inline-start: calc(var(--spacing) * 3);
+  }
+  .ms-5 {
+    margin-inline-start: calc(var(--spacing) * 5);
+  }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
   }
@@ -246,6 +251,9 @@
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
   .inline {
     display: inline;
   }
@@ -254,6 +262,9 @@
   }
   .h-8 {
     height: calc(var(--spacing) * 8);
+  }
+  .h-40 {
+    height: calc(var(--spacing) * 40);
   }
   .h-\[10dvh\] {
     height: 10dvh;
@@ -269,12 +280,6 @@
   }
   .h-screen {
     height: 100vh;
-  }
-  .max-h-3 {
-    max-height: calc(var(--spacing) * 3);
-  }
-  .max-h-3\/4 {
-    max-height: calc(3 / 4 * 100%);
   }
   .min-h-96 {
     min-height: calc(var(--spacing) * 96);
@@ -303,8 +308,17 @@
   .w-full {
     width: 100%;
   }
-  .max-w-50 {
-    max-width: calc(var(--spacing) * 50);
+  .max-w-3 {
+    max-width: calc(var(--spacing) * 3);
+  }
+  .max-w-3\/4 {
+    max-width: calc(3 / 4 * 100%);
+  }
+  .max-w-4 {
+    max-width: calc(var(--spacing) * 4);
+  }
+  .max-w-4\/5 {
+    max-width: calc(4 / 5 * 100%);
   }
   .min-w-1 {
     min-width: var(--spacing);
@@ -329,6 +343,9 @@
   }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -403,9 +420,6 @@
   }
   .bg-gray-300 {
     background-color: var(--color-gray-300);
-  }
-  .bg-gray-700 {
-    background-color: var(--color-gray-700);
   }
   .bg-green-700 {
     background-color: var(--color-green-700);
@@ -604,10 +618,21 @@
   margin-top: var(--spacing);
 }
 .bigger_box {
-  width: calc(2 / 4 * 100%);
+  height: fit-content;
+  cursor: pointer;
   border-radius: var(--radius-2xl);
   background-color: var(--color-white);
   padding: calc(var(--spacing) * 4);
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--color-gray-500);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-white);
+    }
+  }
 }
 .foot {
   display: flex;

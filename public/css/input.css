@@ -16,7 +16,7 @@
     @apply mt-1;
 }
 .bigger_box{
-    @apply bg-white p-4 w-2/4 rounded-2xl;
+    @apply bg-white p-4 h-fit rounded-2xl cursor-pointer hover:bg-gray-500 hover:text-white;
 }
 .foot{
     @apply font-extrabold text-lg rounded-full cursor-pointer h-7 w-7 flex justify-center items-center;

@@ -1,4 +1,4 @@
-<div class="ps-5 bg-gray-200 flex" x-data="{food: 'false'}">
+<div class="ps-5 bg-gray-200 flex" x-data="{food: 'false', type_card: ''}">
     <div class="flex-1">   
         <nav class="flex justify-between items-center h-[10dvh] mr-5">
             <div>
@@ -15,19 +15,19 @@
                     <h1>All Menu</h1>
                     <small>{{ total_food }} items</small>
                 </div>
-                {{#each aside }}
-                    <div class="box" @click="food = '{{this.[0]}}'" :class="food === '{{this.[0]}}' ? 'highlight' : ''">
-                        <h1>{{this.food_name}}</h1>
-                        <p>{{this.id }} items</p>
+                {{#each aside}}
+                    <div class="box" @click="food = '{{this.food_name}}'; type_card = '{{ this.food_name }}'" :class="food === '{{this.food_name}}' ? 'highlight' : ''">
+                        <h1>{{ this.food_name }}</h1>
+                        <p>{{ this.id }} items</p>
                     </div>
                 {{/each }}
             </aside>
-            <main class="mx-5 flex flex-wrap gap-4">
+            <main class="ms-5 grid grid-cols-3 gap-4 max-w-4/5 ">
                 {{#each cards }}
-                    <div class="bigger_box max-w-50 max-h-3/4">
-                        <img src="/assets/a.png" alt="" height="100px" class="rounded-2xl"><br>
+                    <div class="bigger_box" x-show="type_card == '{{ this.id }}'">
+                        <img src="/assets/img.jpg" class="rounded-2xl w-full h-40"><br>
                         <div class="mb-3">
-                            <h3 class="font-semibold">{{ this.food_name }}</h3>
+                            <h3 class="font-semibold">{{ this.foo }}</h3>
                             <small class="font-xs leading-0.5">{{ this.description }}</small>
                         </div>
                         <div class="flex justify-between items-center">
