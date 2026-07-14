@@ -21,6 +21,15 @@ app.get("/", (req, res)=>{
     res.render("index");
 });
 
+app.post("/login", (req, res)=>{
+    let {username, password} = req.body;
+    if(username == "admin" && password == "admin"){
+        res.redirect("/payment");
+    }else{
+        res.redirect("/");
+    };
+});
+
 app.get("/admin", async (req, res)=>{
     var food = await read_food();
     res.render("admin", {group: food});
@@ -28,7 +37,7 @@ app.get("/admin", async (req, res)=>{
 
 app.get("/payment", async (req, res)=>{
     let {food, subfood} = await read_food();
-    res.render("payment", {aside: food, cards: subfood, total_food: 0, title:titles});
+    res.render("payment", {aside: food, cards: subfood, total_food: 0, title:9});
 })
 
 app.post("/insert_subfood", upload.single("photo"), (req, res)=>{
