@@ -17,21 +17,18 @@ app.set("view engine", ".hbs");
 const upload = multer({dest: "uploads/"});
 const date = new Date();
 
-var titles = {
-    "names": "Afang with perewinkles",
-    "desc": "Buy Afang which is always ready anytime anywhere",
-    "time": `${date.getFullYear()}`,
-    "price": '16.00'
-};
-
-app.get("/", async (req, res)=>{
-    let {food, subfood} = await read_food();
-    res.render("payment", {aside: food, cards: subfood, total_food: 0, title:titles});
-})
+app.get("/", (req, res)=>{
+    res.render("index");
+});
 
 app.get("/admin", async (req, res)=>{
     var food = await read_food();
     res.render("admin", {group: food});
+});
+
+app.get("/payment", async (req, res)=>{
+    let {food, subfood} = await read_food();
+    res.render("payment", {aside: food, cards: subfood, total_food: 0, title:titles});
 })
 
 app.post("/insert_subfood", upload.single("photo"), (req, res)=>{

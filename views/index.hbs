@@ -7,22 +7,33 @@
     <link rel="stylesheet" href="./login.css" />
 </head>
 <body>
-    <section class="flex justify-center items-center h-screen p-2.5 bg-gray-200">
-        <div class="w-1/2 min-h-96 rounded-3xl grid grid-cols-2 shadow-lg shadow-black-100">
-            <div id="page1" class="p-4 bg-red-500 text-white flex flex-col gap-3 items-center justify-center rounded-l-3xl">
-                <h1 class="text-center text-2xl font-bold">Welcome To Kala Kitchen</h1>
-                <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit repellat beatae inventore vitae ab aliquam </p>
+    <section class="flex justify-center items-center h-screen p-2.5 bg-[#780000]">
+        <div class="w-[60%] h-5/6 grid grid-cols-2 shadow-lg shadow-black-100 rounded-l-2xl">
+            <div id="page1" class="p-4 bg-[url('/assets/kala.jpg')] bg-cover bg-center rounded-l-2xl text-white flex flex-col gap-3 items-center justify-center">
+                {{!-- <h1 class="text-center text-2xl font-bold">Welcome To Kala Kitchen</h1>
+                <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit repellat beatae inventore vitae ab aliquam </p> --}}
             </div>
-            <div id="page2" class="p-4 py-7 flex flex-col items-center gap-4 bg-white rounded-r-3xl">
-                <h1 class="text-3xl font-bold mb-4">Sign in</h1>
-                <div class="mb-2">
-                    <img src="" alt="" class="border rounded-full" width="80px" height="80px">
+            <form id="page2" class="p-4 py-7 flex flex-col gap-4 bg-white rounded-r-2xl items-center ">
+                <div class="flex flex-col items-center">
+                    <h1 class="text-3xl font-bold">Kala's Kitchen</h1>
+                    <small class="mb-4">Best for tasty food and style</small>
                 </div>
-                <input type="text" placeholder="Worker name" class="rounded-2xl bg-gray-300 h-8 w-10/12 p-3.5">
-                <input type="text" placeholder="Worker password" class="rounded-2xl bg-gray-300 h-8 w-10/12 p-3.5">
-                <p>Read guide</p>
-                <button class="bg-red-500 px-14 py-2 text-white rounded-full font-bold cursor-pointer">Sign in</button>
-            </div>
+                <div class="self-start mx-4">
+                    <h2 class="font-bold text-sm">Sign up into your account</h2>
+                    <p class="text-sm text-gray-500">Welcome back login to your account</p>
+                </div>
+                <div class="w-full px-4 grid gap-4">
+                    <div class="relative">
+                        <i data-lucide="user" class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                        <input type="text" placeholder="Worker name" class="rounded-2xl bg-gray-300 h-8 w-10/12 py-3.5 ps-10 ">
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="lock" class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                        <input type="text" placeholder="Worker password" class="rounded-2xl bg-gray-300 h-8 w-10/12 py-3.5 ps-10 ">
+                    </div>
+                </div>
+                <button class="bg-red-500 w-5/6 mx-8 py-2 text-white font-bold cursor-pointer">Sign in</button>
+            </form>
         </div>
     </section>
 </body>
