@@ -30,7 +30,7 @@
 form button:not(.exclude){
     @apply bg-green-900 text-white w-32 text-sm rounded-3xl p-1 cursor-pointer hover:bg-green-600;
 }
-input,select{
+input:not(.special),select{
     @apply bg-white shadow-black px-2 rounded h-10 ; 
 }
 .admina li i{

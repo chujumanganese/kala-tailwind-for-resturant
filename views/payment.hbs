@@ -2,17 +2,33 @@
     <div class="flex-1">   
         <nav class="flex justify-between items-center h-[10dvh] mr-5">
             <div>
-                <h1 class="font-bold">Kala's Kitchen</h1>
-                <small class="font-extralight">Choose Menu</small>
+                <h1 class="font-bold mb-2">Kala's Kitchen</h1>
+                <div class="flex gap-2 items-center">
+                    <i data-lucide="menu" class="cursor-pointer"></i>
+                    <small class="font-extralight">Choose Menu</small>
+                </div>
             </div>
-            <div class="w-1/6">
-                <input type="text" class="bg-white w-full">
+            <div class="w-4/6 flex items-center gap-4">
+                <ul class="flex justify-between w-2/4">
+                    <li class="flex cursor-pointer">
+                        <i data-lucide="ShieldUser"></i>
+                        <a href="/admin">Admin</a>
+                    </li>
+                    <li class="flex cursor-pointer"><i data-lucide="Settings2"></i>Manual</li>
+                    <li class="flex cursor-pointer"><i data-lucide="log-out"></i>Logout</li>
+                </ul>
+                <div class="w-1/2 relative">
+                    <i data-lucide="search" class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <input type="text" class="special bg-white w-full border border-gray-300 rounded-lg py-2 ps-10 pr-4 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                </div>
             </div>
         </nav>
         <section class="flex h-[90dvh]">
             <aside class="w-1/6 h-full py-3 flex flex-col gap-3">
                 <div class="box">
-                    <h1>All Menu</h1>
+                    <h1 class="flex items-center gap-2">
+                        <i data-lucide="Soup" class=""></i> All Menu
+                    </h1>
                     <small>{{ total_food }} items</small>
                 </div>
                 {{#each aside}}
