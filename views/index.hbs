@@ -4,37 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kala Resturant</title>
-    <link rel="stylesheet" href="./login.css" />
 </head>
 <body>
     <section class="flex justify-center items-center h-screen p-2.5 bg-[#780000]">
-        <div class="w-[60%] h-5/6 grid grid-cols-2 shadow-lg shadow-black-100 rounded-l-2xl">
-            <div id="page1" class="p-4 bg-[url('/assets/kala.jpg')] bg-cover bg-center rounded-l-2xl text-white flex flex-col gap-3 items-center justify-center">
-                {{!-- <h1 class="text-center text-2xl font-bold">Welcome To Kala Kitchen</h1>
-                <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit repellat beatae inventore vitae ab aliquam </p> --}}
+        <div class="w-[60%] h-5/6 grid grid-cols-2 shadow-lg shadow-black-100 rounded-2xl shad">
+            <div id="page1" class="bg-[url('/assets/kala.jpg')] bg-cover bg-center rounded-l-2xl text-white flex flex-col gap-3 items-center justify-center relative xs:hidden">
+               <p class="bg-black loadt p-4 absolute bottom-0 rounded-bl-2xl">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita nobis sunt consectetur in quas veniam quaerat rerum, asperiores excepturi quibusdam aliquid laboriosam ratione porro aperiam quae vitae atque aut recusandae!
+               </p>
             </div>
-            <form method="post" action="/login" id="page2" class="p-4 py-7 flex flex-col gap-4 bg-white rounded-r-2xl items-center ">
+            <form method="post" id="page2" class="xs:col-span-2 p-4 pt-12 flex flex-col gap-4 bg-white rounded-r-2xl items-center ">
                 <div class="flex flex-col items-center">
                     <h1 class="text-3xl font-bold">Kala's Kitchen</h1>
                     <small class="mb-4">Best for tasty food and style</small>
                 </div>
-                <div class="self-start mx-4">
+                <div class="self-start mx-4 my-4">
                     <h2 class="font-bold text-sm">Sign up into your account</h2>
                     <p class="text-sm text-gray-500">Welcome back login to your account</p>
                 </div>
-                <div class="w-full px-4 grid gap-4">
-                    <div class="relative">
+                <div class="w-full px-4 grid gap-4 mb-6" id="swapHtml">
+                    <div class="relative close">
                         <i data-lucide="user" class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
-                        <input type="text" name="username" placeholder="Worker name" class="rounded-2xl bg-gray-300 h-8 w-10/12 py-3.5 ps-10 ">
+                        <input id="username" type="text" name="username" placeholder="Worker name" class="op w-full rounded-2xl bg-gray-300 h-8 py-3.5 ps-10 ">
                     </div>
-                    <div class="relative">
+                    <div class="relative close">
                         <i data-lucide="lock" class="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
-                        <input type="text" name="password" placeholder="Worker password" class="rounded-2xl bg-gray-300 h-8 w-10/12 py-3.5 ps-10 ">
+                        <input type="text" id="password" name="password" placeholder="Worker password" class="op w-full rounded-2xl bg-gray-300 h-8 py-3.5 ps-10 ">
+                    </div>
+                    <div class="hidden" id="down_captcha">
+                        <img src="" alt="" id="captcha_image" class="w-1/2 mx-auto">
+                        <input type="text" name="captchas" class="w-full" placeholder="Type what you see...">
                     </div>
                 </div>
-                <button class="bg-red-500 w-5/6 mx-8 py-2 text-white font-bold cursor-pointer">Sign in</button>
+                <button type="submit" class="fancy_button">
+                    <span id="load" class="w-5 h-5 rounded-full border-4 border-red-500 border-t-white border-l-white animate-spin hidden"></span>
+                    <span>Sign in</span>
+                </button>
             </form>
         </div>
     </section>
+    <script>
+        const form = document.querySelector("form");
+        const btn = form.querySelector('button[type="submit"]');
+        const loader = document.querySelector("#load");
+        const swapper = document.querySelectorAll("#swapHtml .close");
+        const captcha = document.getElementById("down_captcha");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        var captcha_mode = false;
+
+        form.addEventListener("submit", async (e)=>{
+            e.preventDefault();
+            btn.disabled = true;
+            loader.classList.remove("hidden");
+        
+            try{
+                const res = await fetch("/api/login", { method: "POST", headers:{"Content-Type": "application/json"}, 
+                body: JSON.stringify({username: username.value, password: password.value }) });
+                var response = await res.json();
+            }catch (err){
+                console.log("Cannot connect to server, call admin");
+            }finally{
+                loader.classList.add("hidden");
+                btn.disabled = false;
+            }
+
+            console.log(response);
+            if(response.success){
+                swapper.forEach(e=>{ e.style.display = "none" ; })
+                document.getElementById("captcha_image").src = response.data;
+                captcha.classList.remove("hidden");
+            }else{
+                alert(response.message || "Login failed.");
+            }
+        })
+
+    </script>
 </body>
 </html>
